@@ -5,56 +5,74 @@
 </head>
 
 <script>
-  var lawful_good = 0
-
-  function increment() {
-    ++lawful_good;
-    update();
+  var grades = {
+    lawful_good: 0,
+    stupid_good: 0,
+    chaotic_good: 0,
+    lawful_stupid: 0,
+    true_stupid: 0,
+    chaotic_stupid: 0,
+    lawful_evil: 0,
+    stupid_evil: 0,
+    chaotic_evil: 0,
   }
 
-  function update() {
-    document.getElementById("box__counter__lawful_good").innerHTML = lawful_good;
+  function increment(category) {
+    ++grades[category];
+    update(category);
+  }
+
+  function update(category) {
+    document.getElementById("box__counter__"+category).innerHTML = grades[category];
   }
 </script>
 
 <div class="board">
   <div class="box">
     <div class="box__counter" id="box__counter__lawful_good">0</div>
-    <div class="box__text"><a href="#" onclick="increment()">Lawful Good</a></div>
+    <div class="box__text"><a href="#" onclick="increment('lawful_good')">Lawful Good</a></div>
     <img src="alignments/lawful-good.jpg">
   </div>
   <div class="box">
-    <div class="box__text"><a href="#">Stupid Good</a></div>
+    <div class="box__counter" id="box__counter__stupid_good">0</div>
+    <div class="box__text"><a href="#" onclick="increment('stupid_good')">Stupid Good</a></div>
     <img src="alignments/stupid-good.jpg">
   </div>
   <div class="box">
-    <div class="box__text"><a href="#">Chaotic Good</a></div>
+    <div class="box__counter" id="box__counter__chaotic_good">0</div>
+    <div class="box__text"><a href="#" onclick="increment('chaotic_good')">Chaotic Good</a></div>
     <img src="alignments/chaotic-good.jpg">
   </div>
 
   <div class="box">
-    <div class="box__text"><a href="#">Lawful Stupid</a></div>
+    <div class="box__counter" id="box__counter__lawful_stupid">0</div>
+    <div class="box__text"><a href="#" onclick="increment('lawful_stupid')">Lawful Stupid</a></div>
     <img src="alignments/lawful-stupid.jpg">
   </div>
   <div class="box">
-    <div class="box__text"><a href="#">True Stupid</a></div>
+    <div class="box__counter" id="box__counter__true_stupid">0</div>
+    <div class="box__text"><a href="#" onclick="increment('true_stupid')">True Stupid</a></div>
     <img src="alignments/true-stupid.jpg">
   </div>
   <div class="box">
-    <div class="box__text"><a href="#">Chaotic Stupid</a></div>
+    <div class="box__counter" id="box__counter__chaotic_stupid">0</div>
+    <div class="box__text"><a href="#" onclick="increment('chaotic_stupid')">Chaotic Stupid</a></div>
     <img src="alignments/chaotic-stupid.jpg">
   </div>
 
   <div class="box">
-    <div class="box__text"><a href="#">Lawful Evil</a></div>
+    <div class="box__counter" id="box__counter__lawful_evil">0</div>
+    <div class="box__text"><a href="#" onclick="increment('lawful_evil')">Lawful Evil</a></div>
     <img src="alignments/lawful-evil.jpg">
   </div>
   <div class="box">
-    <div class="box__text"><a href="#">Stupid Evil</a></div>
+    <div class="box__counter" id="box__counter__stupid_evil">0</div>
+    <div class="box__text"><a href="#" onclick="increment('stupid_evil')">Stupid Evil</a></div>
     <img src="alignments/stupid-evil.jpg">
   </div>
   <div class="box">
-    <div class="box__text"><a href="#">Chaotic Evil</a></div>
+    <div class="box__counter" id="box__counter__chaotic_evil">0</div>
+    <div class="box__text"><a href="#" onclick="increment('chaotic_evil')">Chaotic Evil</a></div>
     <img src="alignments/chaotic-evil.jpg">
   </div>
 </div>
