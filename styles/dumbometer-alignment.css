@@ -14,6 +14,7 @@ body {
 .box {
   background: #444;
   border: 1px solid #555;
+  color: #AAA;
 
   padding: 1em;
 
@@ -41,7 +42,7 @@ body {
 .box__counter {
   position: absolute;
   top: 0;
-  left: 0;
+  left: 0;  
 }
 
 a {

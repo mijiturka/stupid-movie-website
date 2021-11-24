@@ -22,57 +22,79 @@
     update(category);
   }
 
+  function display_update(category) {
+    document.getElementById("box__counter__"+category).style.fontSize = "1000%";
+    document.getElementById("box__counter__"+category).style.color = "white";
+    document.getElementById("box__counter__"+category).style.backgroundColor = "black";
+    document.getElementById("box__counter__"+category).style.width = "100%";
+    document.getElementById("box__counter__"+category).style.height = "100%";
+    document.getElementById("box__counter__"+category).style.lineHeight = "150%";
+    // line-height: 70px;
+    setTimeout(function () {
+        document.getElementById("box__counter__"+category).style.fontSize = "100%";
+        document.getElementById("box__counter__"+category).style.color = "#AAA";
+        document.getElementById("box__counter__"+category).style.backgroundColor = "transparent";
+        document.getElementById("box__counter__"+category).style.width = "auto";
+        document.getElementById("box__counter__"+category).style.height = "auto";
+        document.getElementById("box__counter__"+category).style.lineHeight = "auto";
+      },
+      1000
+    );
+  }
+
+
   function update(category) {
     document.getElementById("box__counter__"+category).innerHTML = grades[category];
+    display_update(category);
   }
 </script>
 
 <div class="board">
   <div class="box">
-    <div class="box__counter" id="box__counter__lawful_good">0</div>
     <div class="box__text"><a href="#" onclick="increment('lawful_good')">Lawful Good</a></div>
+    <div class="box__counter" id="box__counter__lawful_good">0</div>
     <img src="alignments/lawful-good.jpg">
   </div>
   <div class="box">
-    <div class="box__counter" id="box__counter__stupid_good">0</div>
     <div class="box__text"><a href="#" onclick="increment('stupid_good')">Stupid Good</a></div>
+    <div class="box__counter" id="box__counter__stupid_good">0</div>
     <img src="alignments/stupid-good.jpg">
   </div>
   <div class="box">
-    <div class="box__counter" id="box__counter__chaotic_good">0</div>
     <div class="box__text"><a href="#" onclick="increment('chaotic_good')">Chaotic Good</a></div>
+    <div class="box__counter" id="box__counter__chaotic_good">0</div>
     <img src="alignments/chaotic-good.jpg">
   </div>
 
   <div class="box">
-    <div class="box__counter" id="box__counter__lawful_stupid">0</div>
     <div class="box__text"><a href="#" onclick="increment('lawful_stupid')">Lawful Stupid</a></div>
+    <div class="box__counter" id="box__counter__lawful_stupid">0</div>
     <img src="alignments/lawful-stupid.jpg">
   </div>
   <div class="box">
-    <div class="box__counter" id="box__counter__true_stupid">0</div>
     <div class="box__text"><a href="#" onclick="increment('true_stupid')">True Stupid</a></div>
+    <div class="box__counter" id="box__counter__true_stupid">0</div>
     <img src="alignments/true-stupid.jpg">
   </div>
   <div class="box">
-    <div class="box__counter" id="box__counter__chaotic_stupid">0</div>
     <div class="box__text"><a href="#" onclick="increment('chaotic_stupid')">Chaotic Stupid</a></div>
+    <div class="box__counter" id="box__counter__chaotic_stupid">0</div>
     <img src="alignments/chaotic-stupid.jpg">
   </div>
 
   <div class="box">
-    <div class="box__counter" id="box__counter__lawful_evil">0</div>
     <div class="box__text"><a href="#" onclick="increment('lawful_evil')">Lawful Evil</a></div>
+    <div class="box__counter" id="box__counter__lawful_evil">0</div>
     <img src="alignments/lawful-evil.jpg">
   </div>
   <div class="box">
-    <div class="box__counter" id="box__counter__stupid_evil">0</div>
     <div class="box__text"><a href="#" onclick="increment('stupid_evil')">Stupid Evil</a></div>
+    <div class="box__counter" id="box__counter__stupid_evil">0</div>
     <img src="alignments/stupid-evil.jpg">
   </div>
   <div class="box">
-    <div class="box__counter" id="box__counter__chaotic_evil">0</div>
     <div class="box__text"><a href="#" onclick="increment('chaotic_evil')">Chaotic Evil</a></div>
+    <div class="box__counter" id="box__counter__chaotic_evil">0</div>
     <img src="alignments/chaotic-evil.jpg">
   </div>
 </div>
