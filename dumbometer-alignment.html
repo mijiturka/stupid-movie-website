@@ -4,9 +4,23 @@
   <link rel="stylesheet" media="screen" href="https://fontlibrary.org//face/xolonium" type="text/css"/>
 </head>
 
+<script>
+  var lawful_good = 0
+
+  function increment() {
+    ++lawful_good;
+    update();
+  }
+
+  function update() {
+    document.getElementById("box__counter__lawful_good").innerHTML = lawful_good;
+  }
+</script>
+
 <div class="board">
   <div class="box">
-    <div class="box__text"><a href="#">Lawful Good</a></div>
+    <div class="box__counter" id="box__counter__lawful_good">0</div>
+    <div class="box__text"><a href="#" onclick="increment()">Lawful Good</a></div>
     <img src="alignments/lawful-good.jpg">
   </div>
   <div class="box">
