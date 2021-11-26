@@ -42,10 +42,13 @@
     );
   }
 
-
   function update(category) {
     document.getElementById("box__counter__"+category).innerHTML = grades[category];
     display_update(category);
+  }
+
+  function output_result() {
+    document.getElementById("result").innerHTML = JSON.stringify(grades);
   }
 </script>
 
@@ -97,4 +100,9 @@
     <div class="box__counter" id="box__counter__chaotic_evil">0</div>
     <img src="alignments/chaotic-evil.jpg">
   </div>
+
+  <!-- Results -->
+
+  <small><a href="#" onclick="output_result()">Тука никой не ти следи резултата</a></small>
+  <span id="result" class="small" />
 </div>

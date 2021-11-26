@@ -11,3 +11,7 @@ h2, h3 {
 body {
   font-family: sans-serif;
 }
+
+small, .small {
+  font-size: 80%;
+}
