@@ -1,7 +1,7 @@
 .board {
     display: grid;
     grid-template-rows: 15em 15em 15em;
-    grid-template-columns: 15em 15em 15em;
+    grid-template-columns: 15em 15em 15em 7.5em;
     margin: auto;
 }
 
@@ -12,6 +12,25 @@ body {
 }
 
 .box {
+  background: #444;
+  border: 1px solid #555;
+  color: #AAA;
+
+  padding: 1em;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+}
+
+.box_mystical {
+  grid-column-start: 4;
+  grid-column-end: 4;
+  grid-row-start: 1;
+  grid-row-end: 4;
+
   background: #444;
   border: 1px solid #555;
   color: #AAA;
@@ -37,6 +56,18 @@ body {
     font-size: 200%;
     font-family: 'XoloniumRegular';
     background-color: rgba(0, 0, 0, 0.75);
+}
+
+.box__text__mystical {
+  position: absolute;
+  transform: rotate(-90deg);
+
+  padding-left: 1.2em;
+  padding-right: 1.2em;
+
+  font-size: 200%;
+  font-family: 'XoloniumRegular';
+  background-color: rgba(0, 0, 0, 0.75);
 }
 
 .box__counter {
