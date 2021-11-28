@@ -12,12 +12,12 @@
 
 <div class="gallery">
 
-  {% for film in films -%}
+  {% for (film, film_title) in films -%}
 
     <div class="container">
       <img src="posters/{{film}}.jpg">
       <div class="box">
-        <a href="reviews/{{film}}.html"><h1>{{film}}</h1></a>
+        <a href="reviews/{{film}}.html"><h1>{{film_title}}</h1></a>
       </div>
     </div>
 
