@@ -3,5 +3,8 @@ from pathlib import Path
 
 films = Path('./list.md').read_text().splitlines()
 
-html = jinja2.Template("{% for film in films -%} FILM: {{film}} \n{% endfor %}").render(films=films)
+env = jinja2.Environment(loader = jinja2.FileSystemLoader('templates'))
+template = env.get_template('film-list.html')
+
+html = template.render(films=films)
 print(html)
