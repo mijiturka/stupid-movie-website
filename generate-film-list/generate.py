@@ -18,7 +18,31 @@ all_films = json.loads(Path('./list.json').read_text())['films']
 html = template().render(films=all_films.items())
 write(html, 'films.html')
 
-# Generate a page with 20 randomly selected films
-all_films_tuples = list(all_films.items())
-html = template().render(films=random.choices(all_films_tuples, k=20))
-write(html, 'films-1-20.html')
+# Generate pages with 20 randomly selected films on each
+all_titles_list = list(all_films.keys())
+print(len(all_titles_list))
+selection_positions = list(range(len(all_titles_list)))
+random.shuffle(selection_positions)
+
+films_on_page = []
+num_films_on_page = 0
+page_number = 1
+for position in selection_positions:
+    film = all_titles_list[position]
+    fulltext_title = all_films.pop(film)
+    films_on_page.append((film, fulltext_title))
+    num_films_on_page += 1
+
+    if num_films_on_page == 20:
+        # Generate page
+        html = template().render(films=films_on_page)
+        write(html, f'films-{page_number}.html')
+        # Move to next page
+        page_number += 1
+        # Start it fresh
+        num_films_on_page = 0
+        films_on_page = []
+
+# Generate the last page
+html = template().render(films=films_on_page)
+write(html, f'films-{page_number}.html')
