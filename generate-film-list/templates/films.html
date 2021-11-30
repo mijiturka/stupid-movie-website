@@ -23,6 +23,12 @@
 
   {% endfor %}
 
+  {% if next_page: -%}
+
+    <div align="right"><a href="{{next_page}}">Next</a></div>
+
+  {% endif %}
+
 </div>
 
 </body>
