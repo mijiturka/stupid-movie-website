@@ -15,3 +15,8 @@ body {
 small, .small {
   font-size: 80%;
 }
+
+.large {
+  font-family: 'XoloniumRegular';
+  font-size: 200%;
+}
