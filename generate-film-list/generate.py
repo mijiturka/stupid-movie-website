@@ -5,7 +5,7 @@ import random
 
 def template():
     env = jinja2.Environment(loader = jinja2.FileSystemLoader('templates'))
-    return env.get_template('films.html')
+    return env.get_template('template_films.html')
 
 def write(html, file_name):
     Path('./generated').mkdir(exist_ok=True)
