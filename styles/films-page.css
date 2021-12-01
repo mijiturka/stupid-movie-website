@@ -28,7 +28,19 @@ img {
     background-color: rgba(255, 255, 255, 0.6);
 }
 
-.next {
-  text-align: right;
+.page_navigation {
+  /* center the container */
+  width: 75%;
+  margin-left: auto;
+  margin-right: auto;
+  /* space items as far away from each other as space allows */
+  display: flex;
+  justify-content: space-between;
+}
+
+.prev, .next {
   padding: 0.2em;
+}
+.inactive {
+  visibility: hidden;
 }

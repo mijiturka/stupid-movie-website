@@ -23,11 +23,20 @@
 
   {% endfor %}
 
-  {% if next_page: -%}
+  <div class="page_navigation">
+    {% if prev_page: -%}
+      <div class="prev large"><a href="{{prev_page}}">&lt; Prev</a></div>
+    {% else: -%}
+      <!-- Create a hidden element. Still required to align items easily with CSS -->
+      <div class="prev large inactive"><a href="{{prev_page}}">&lt; Prev</a></div>
+    {% endif %}
 
-    <div class="next large"><a href="{{next_page}}">Next</a></div>
-
-  {% endif %}
+    {% if next_page: -%}
+      <div class="next large"><a href="{{next_page}}">Next &gt;</a></div>
+    {% else: -%}
+      <div class="next large inactive"><a href="{{next_page}}">Next &gt;</a></div>
+    {% endif %}
+  </div>
 
 </div>
 
