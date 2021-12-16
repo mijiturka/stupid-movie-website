@@ -62,4 +62,13 @@ def film_pages():
     write(html, f'{file_name_prefix}-{page_number}.html')
 
 def single_film_page(film):
-    pass
+    film_title = json.loads(Path('./list.json').read_text())['films'][film]
+    html = template('template_single_film.html').render(
+        film = film,
+        film_title = film_title,
+        film_grade = 'cool? / 2',
+        review_shmentina = 'yeah',
+        review_capellyana = 'cool',
+        review_both_end = 'super nice'
+    )
+    write(html, f'{film}.html')

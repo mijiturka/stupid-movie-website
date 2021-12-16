@@ -1,0 +1,42 @@
+<head>
+<link rel="stylesheet" href="styles/single-film-page.css" />
+<!-- <link rel="stylesheet" media="screen" href="fonts/font-xolonium.css" type="text/css"/> -->
+<link rel="stylesheet" media="screen" href="https://fontlibrary.org//face/xolonium" type="text/css"/>
+<link rel="stylesheet" href="styles/text.css" />
+</head>
+
+<header>
+    <h3>Shmentina & Capellyana present...</h3>
+</header>
+
+<div class="container">
+    <aside class="poster-box">
+      <img class="poster" src="posters/{{film}}.jpg">
+    </aside>
+
+    <!-- Main content -->
+    <main class="review">
+    <article>
+
+        <h1>{{film_title}}</h1>
+        <h2>({{film_grade}})</h2>
+
+{{review_both_start}}
+
+        <img class="avatar-left" src="avatars/shmentina-small.png">
+
+<p>Шментина:</p>
+{{review_shmentina}}
+
+        <img class="avatar-right" src="avatars/capellyana-small.png">
+<p>Капеляна:</p>
+{{review_capellyana}}
+
+  <p><br/></p>
+
+{{review_both_end}}
+
+    </article>
+
+    </main>
+</div>
