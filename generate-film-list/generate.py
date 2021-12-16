@@ -63,12 +63,14 @@ def film_pages():
 
 def single_film_page(film):
     film_title = json.loads(Path('./list.json').read_text())['films'][film]
+    review = json.loads(Path(f'../reviews-json/{film}.json').read_text())
     html = template('template_single_film.html').render(
         film = film,
         film_title = film_title,
-        film_grade = 'cool? / 2',
-        review_shmentina = 'yeah',
-        review_capellyana = 'cool',
-        review_both_end = 'super nice'
+        film_grade = review['grade'],
+        review_both_start = review.get('review_both_start', None),
+        review_shmentina = review['shmentina'],
+        review_capellyana = review['capellyana'],
+        review_both_end = review.get('review_both_end', None)
     )
     write(html, f'{film}.html')
