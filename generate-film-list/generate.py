@@ -71,6 +71,8 @@ def single_film_page(film):
         review_both_start = review.get('review_both_start', None),
         review_shmentina = review['shmentina'],
         review_capellyana = review['capellyana'],
-        review_both_end = review.get('review_both_end', None)
+        dumbometers = review.get('dumbometers', None),
+        review_both_end = review.get('review_both_end', None),
+        timestamp = review['timestamp']
     )
     write(html, f'{film}.html')
