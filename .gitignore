@@ -1,5 +1,9 @@
-posters
 venv
+__pycache__
+
 generated
+
+posters
 films.html
 films-*.html
+reviews-json
