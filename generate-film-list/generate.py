@@ -19,8 +19,9 @@ def random_order(titles_list):
 
     return selection_positions
 
-def pages_of_lists(films, positions, template_file='template_films.html', films_per_page=20):
-    file_name_prefix = "films"
+def pages_of_lists(films, positions,
+    template_file='template_films.html', films_per_page=20,
+    generated_file_name_prefix = "films"):
 
     films_on_page = []
     num_films_on_page = 0
@@ -38,15 +39,15 @@ def pages_of_lists(films, positions, template_file='template_films.html', films_
             if page_number == 1:
                 html = template(template_file).render(
                     films=films_on_page,
-                    next_page=f'{file_name_prefix}-{page_number+1}.html'
+                    next_page=f'{generated_file_name_prefix}-{page_number+1}.html'
                 )
             else:
                 html = template(template_file).render(
                     films=films_on_page,
-                    prev_page=f'{file_name_prefix}-{page_number-1}.html',
-                    next_page=f'{file_name_prefix}-{page_number+1}.html'
+                    prev_page=f'{generated_file_name_prefix}-{page_number-1}.html',
+                    next_page=f'{generated_file_name_prefix}-{page_number+1}.html'
                 )
-            write(html, f'{file_name_prefix}-{page_number}.html')
+            write(html, f'{generated_file_name_prefix}-{page_number}.html')
             # Move to next page
             page_number += 1
             # Start it fresh
@@ -55,7 +56,7 @@ def pages_of_lists(films, positions, template_file='template_films.html', films_
 
     # Generate the last page
     html = template(template_file).render(films=films_on_page)
-    write(html, f'{file_name_prefix}-{page_number}.html')
+    write(html, f'{generated_file_name_prefix}-{page_number}.html')
 
 def all_film_pages():
     # Generate pages with 20 randomly arranged films on each
