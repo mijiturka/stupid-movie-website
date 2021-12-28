@@ -11,10 +11,10 @@ def write(html, file_name):
     Path('./generated').mkdir(exist_ok=True)
     Path(f'./generated/{file_name}').write_text(html)
 
-def film_pages():
-    # Get info on all films
-    all_films = json.loads(Path('./list.json').read_text())['films']
+def all_film_pages():
+    return pages_of_lists(json.loads(Path('./list.json').read_text())['films'])
 
+def pages_of_lists(all_films):
     # Generate a page with the full list of films
     html = template('template_films.html').render(films=all_films.items())
     write(html, 'films.html')
