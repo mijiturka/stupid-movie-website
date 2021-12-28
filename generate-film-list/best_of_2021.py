@@ -15,7 +15,7 @@ def generate_voting_page():
     generate.pages_of_lists(
         seen_in_2021,
         positions,
-        template_file='template_new_year.html',
+        template_file='template_vote.html',
         films_per_page=100,
         generated_file_name_prefix='vote'
     )
@@ -41,7 +41,7 @@ def generate_results_page(result):
     generate.pages_of_lists(
         films,
         positions,
-        template_file='template_films.html',
+        template_file='template_films_with_scores.html',
         films_per_page=100,
         generated_file_name_prefix='voting-results'
     )

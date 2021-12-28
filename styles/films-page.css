@@ -52,6 +52,24 @@ img {
   vertical-align: text-bottom;
 }
 
+.box_voting.rank {
+  width: 5%;
+  font-family: 'XoloniumRegular';
+  font-size: 500%;
+  text-align: center;
+}
+.box_voting.rank.score {
+  position: absolute;
+  top: 0;
+  left: auto;
+  right: 0;
+}
+.box_voting.description {
+  width: 5%;
+  text-align: center;
+  font-size: 300%;
+}
+
 .page_navigation {
   /* center the container */
   width: 75%;

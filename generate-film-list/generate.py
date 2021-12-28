@@ -28,7 +28,21 @@ def pages_of_lists(films, positions,
     page_number = 1
     for position in positions:
         film = films[position]
-        films_on_page.append((film, film_utilities.fulltext_title(film)))
+
+        if template_file == 'template_films.html':
+            films_on_page.append((
+                    film,
+                    film_utilities.fulltext_title(film)
+                )
+            )
+        if template_file == 'template_films_with_scores.html':
+            films_on_page.append((
+                    film,
+                    film_utilities.fulltext_title(film),
+                    position+1
+                )
+            )
+
         num_films_on_page += 1
 
         if num_films_on_page == films_per_page:
