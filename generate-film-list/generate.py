@@ -15,7 +15,7 @@ def all_film_pages():
     # Generate pages with 20 randomly arranged films on each
     pages_of_lists(json.loads(Path('./list.json').read_text())['films'])
 
-def pages_of_lists(all_films, films_per_page=20):
+def pages_of_lists(all_films, template_file='template_films.html', films_per_page=20):
     file_name_prefix = "films"
     all_titles_list = list(all_films.keys())
     selection_positions = list(range(len(all_titles_list)))
@@ -36,12 +36,12 @@ def pages_of_lists(all_films, films_per_page=20):
             # Workaround for the fact that I can't get Jinja to recognise None
             html = ''
             if page_number == 1:
-                html = template('template_films.html').render(
+                html = template(template_file).render(
                     films=films_on_page,
                     next_page=f'{file_name_prefix}-{page_number+1}.html'
                 )
             else:
-                html = template('template_films.html').render(
+                html = template(template_file).render(
                     films=films_on_page,
                     prev_page=f'{file_name_prefix}-{page_number-1}.html',
                     next_page=f'{file_name_prefix}-{page_number+1}.html'
@@ -54,7 +54,7 @@ def pages_of_lists(all_films, films_per_page=20):
             films_on_page = []
 
     # Generate the last page
-    html = template('template_films.html').render(films=films_on_page)
+    html = template(template_file).render(films=films_on_page)
     write(html, f'{file_name_prefix}-{page_number}.html')
 
 def single_film_page(film):
