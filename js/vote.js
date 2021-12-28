@@ -31,3 +31,7 @@ function redraw() {
     .sort((a,b)=>votes[a.id]<votes[b.id])
     .forEach(movie=>list.appendChild(movie));
 }
+
+function output_result() {
+  document.getElementById("result").innerHTML = JSON.stringify(votes);
+}
