@@ -3,6 +3,8 @@ import json
 from pathlib import Path
 import random
 
+import film_utilities
+
 def template(file_name):
     env = jinja2.Environment(loader = jinja2.FileSystemLoader('templates'))
     return env.get_template(file_name)
@@ -11,23 +13,21 @@ def write(html, file_name):
     Path('./generated').mkdir(exist_ok=True)
     Path(f'./generated/{file_name}').write_text(html)
 
-def all_film_pages():
-    # Generate pages with 20 randomly arranged films on each
-    pages_of_lists(json.loads(Path('./list.json').read_text())['films'])
-
-def pages_of_lists(all_films, template_file='template_films.html', films_per_page=20):
-    file_name_prefix = "films"
-    all_titles_list = list(all_films.keys())
-    selection_positions = list(range(len(all_titles_list)))
+def random_order(titles_list):
+    selection_positions = list(range(len(titles_list)))
     random.shuffle(selection_positions)
+
+    return selection_positions
+
+def pages_of_lists(films, positions, template_file='template_films.html', films_per_page=20):
+    file_name_prefix = "films"
 
     films_on_page = []
     num_films_on_page = 0
     page_number = 1
-    for position in selection_positions:
-        film = all_titles_list[position]
-        fulltext_title = all_films.pop(film)
-        films_on_page.append((film, fulltext_title))
+    for position in positions:
+        film = films[position]
+        films_on_page.append((film, film_utilities.fulltext_title(film)))
         num_films_on_page += 1
 
         if num_films_on_page == films_per_page:
@@ -56,6 +56,15 @@ def pages_of_lists(all_films, template_file='template_films.html', films_per_pag
     # Generate the last page
     html = template(template_file).render(films=films_on_page)
     write(html, f'{file_name_prefix}-{page_number}.html')
+
+def all_film_pages():
+    # Generate pages with 20 randomly arranged films on each
+
+    all_films = json.loads(Path('./list.json').read_text())['films']
+    titles_list = list(all_films.keys())
+    selection_positions = random_order(titles_list)
+
+    pages_of_lists(titles_list, selection_positions)
 
 def single_film_page(film):
     film_title = json.loads(Path('./list.json').read_text())['films'][film]
