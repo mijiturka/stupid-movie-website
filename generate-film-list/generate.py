@@ -12,14 +12,10 @@ def write(html, file_name):
     Path(f'./generated/{file_name}').write_text(html)
 
 def all_film_pages():
-    return pages_of_lists(json.loads(Path('./list.json').read_text())['films'])
+    # Generate pages with 20 randomly arranged films on each
+    pages_of_lists(json.loads(Path('./list.json').read_text())['films'])
 
-def pages_of_lists(all_films):
-    # Generate a page with the full list of films
-    html = template('template_films.html').render(films=all_films.items())
-    write(html, 'films.html')
-
-    # Generate pages with 20 randomly selected films on each
+def pages_of_lists(all_films, films_per_page=20):
     file_name_prefix = "films"
     all_titles_list = list(all_films.keys())
     selection_positions = list(range(len(all_titles_list)))
@@ -34,7 +30,7 @@ def pages_of_lists(all_films):
         films_on_page.append((film, fulltext_title))
         num_films_on_page += 1
 
-        if num_films_on_page == 20:
+        if num_films_on_page == films_per_page:
             # Generate page
 
             # Workaround for the fact that I can't get Jinja to recognise None
