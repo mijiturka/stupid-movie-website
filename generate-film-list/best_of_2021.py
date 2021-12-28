@@ -1,3 +1,4 @@
+import argparse
 import json
 from pathlib import Path
 
@@ -48,5 +49,24 @@ def generate_results_page():
     )
 
 if __name__ == '__main__':
-    generate_voting_page()
-    generate_results_page()
+    parser = argparse.ArgumentParser(description='Generate pages for vote-sorted movies')
+    parser.add_argument(
+        '--vote',
+        help='Generate a page of the movies seen in 2021, with voting buttons',
+        action='store_true',
+        default=False
+    )
+    parser.add_argument(
+        '--results',
+        help='Generate a page of movies based on voting results, sorted by result from best to worst',
+        action='store_true',
+        default=False
+    )
+    args = parser.parse_args()
+
+    if not args.vote and not args.results:
+        parser.error('No action to be taken')
+    if args.vote:
+        generate_voting_page()
+    if args.results:
+        generate_results_page()
