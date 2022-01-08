@@ -46,6 +46,8 @@ def generate_results_page(result):
         generated_file_name_prefix='voting-results'
     )
 
+# Combined charts generation
+
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Generate pages for vote-sorted movies')
     parser.add_argument(
