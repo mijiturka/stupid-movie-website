@@ -17,7 +17,7 @@ a {
 
   padding-top: 0.1%;
   padding-bottom: 0.1%;
-  padding-left: 2%;
+  padding-left: 0.5;
   padding-right: 2%;
 
   color: #AAA;
@@ -26,11 +26,8 @@ a {
   background-color: rgba(0, 0, 0, 0.75);
 }
 
-.play {
-  position: absolute;
-  bottom: -1%;
-  left: 0;
-
-  color: rgba(255, 255, 255, 0.5);
-  font-size: 250%;
+.duration i {
+  /* play icon */
+  font-size: 125%;
+  vertical-align: text-bottom;
 }
