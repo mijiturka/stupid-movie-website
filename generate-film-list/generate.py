@@ -8,9 +8,9 @@ import film_utilities
 
 logger = logging.getLogger(__name__)
 
-def template(file_name):
-    env = jinja2.Environment(loader = jinja2.FileSystemLoader('templates'))
-    return env.get_template(file_name)
+def template(file_path):
+    env = jinja2.Environment(loader = jinja2.FileSystemLoader(Path(file_path).parent))
+    return env.get_template(Path(file_path).name)
 
 def write(html, file_name):
     Path('./generated').mkdir(exist_ok=True)
@@ -23,12 +23,12 @@ def random_order(titles_list):
     return selection_positions
 
 def pages_of_lists(films, positions,
-    template_file='template_films.html', films_per_page=20,
+    template_path='templates/template_films.html', films_per_page=20,
     generated_file_name_prefix = "films",
     with_scores=False):
 
     logger.info(f'Generating pages of {films_per_page} films per page '
-                f'using template {template_file}. '
+                f'using template {template_path}. '
                 f'Files will be written as {generated_file_name_prefix}-*.html'
     )
 
@@ -52,12 +52,12 @@ def pages_of_lists(films, positions,
             # Workaround for the fact that I can't get Jinja to recognise None
             html = ''
             if page_number == 1:
-                html = template(template_file).render(
+                html = template(template_path).render(
                     films=films_on_page,
                     next_page=f'{generated_file_name_prefix}-{page_number+1}.html'
                 )
             else:
-                html = template(template_file).render(
+                html = template(template_path).render(
                     films=films_on_page,
                     prev_page=f'{generated_file_name_prefix}-{page_number-1}.html',
                     next_page=f'{generated_file_name_prefix}-{page_number+1}.html'
@@ -71,7 +71,7 @@ def pages_of_lists(films, positions,
             films_on_page = []
 
     # Generate the last page
-    html = template(template_file).render(films=films_on_page)
+    html = template(template_path).render(films=films_on_page)
     logger.debug(f'Writing page {page_number} to {generated_file_name_prefix}-{page_number}.html')
     write(html, f'{generated_file_name_prefix}-{page_number}.html')
 
@@ -87,7 +87,7 @@ def all_film_pages():
 def single_film_page(film):
     film_title = json.loads(Path('./list.json').read_text())['films'][film]
     review = json.loads(Path(f'../reviews-json/{film}.json').read_text())
-    html = template('template_single_film.html').render(
+    html = template('templates/template_single_film.html').render(
         film = film,
         film_title = film_title,
         film_grade = review['grade'],
