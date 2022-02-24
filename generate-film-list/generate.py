@@ -1,9 +1,12 @@
 import jinja2
 import json
+import logging
 from pathlib import Path
 import random
 
 import film_utilities
+
+logger = logging.getLogger(__name__)
 
 def template(file_name):
     env = jinja2.Environment(loader = jinja2.FileSystemLoader('templates'))
@@ -21,27 +24,25 @@ def random_order(titles_list):
 
 def pages_of_lists(films, positions,
     template_file='template_films.html', films_per_page=20,
-    generated_file_name_prefix = "films"):
+    generated_file_name_prefix = "films",
+    with_scores=False):
+
+    logger.info(f'Generating pages of {films_per_page} films per page '
+                f'using template {template_file}. '
+                f'Files will be written as {generated_file_name_prefix}-*.html'
+    )
 
     films_on_page = []
     num_films_on_page = 0
     page_number = 1
     for position in positions:
         film = films[position]
+        logger.debug(f'Adding {film} to page {page_number}')
 
-        if template_file == 'template_films.html':
-            films_on_page.append((
-                    film,
-                    film_utilities.fulltext_title(film)
-                )
-            )
-        if template_file == 'template_films_with_scores.html':
-            films_on_page.append((
-                    film,
-                    film_utilities.fulltext_title(film),
-                    position+1
-                )
-            )
+        parameters_for_template = (film, film_utilities.fulltext_title(film))
+        if with_scores:
+            parameters_for_template.append(position+1)
+        films_on_page.append(parameters_for_template)
 
         num_films_on_page += 1
 
@@ -61,6 +62,7 @@ def pages_of_lists(films, positions,
                     prev_page=f'{generated_file_name_prefix}-{page_number-1}.html',
                     next_page=f'{generated_file_name_prefix}-{page_number+1}.html'
                 )
+            logger.debug(f'Writing page {page_number} to {generated_file_name_prefix}-{page_number}.html')
             write(html, f'{generated_file_name_prefix}-{page_number}.html')
             # Move to next page
             page_number += 1
@@ -70,6 +72,7 @@ def pages_of_lists(films, positions,
 
     # Generate the last page
     html = template(template_file).render(films=films_on_page)
+    logger.debug(f'Writing page {page_number} to {generated_file_name_prefix}-{page_number}.html')
     write(html, f'{generated_file_name_prefix}-{page_number}.html')
 
 def all_film_pages():
@@ -96,3 +99,6 @@ def single_film_page(film):
         timestamp = review['timestamp']
     )
     write(html, f'{film}.html')
+
+if __name__ == '__main__':
+    logging.basicConfig(format='%(asctime)s %(message)s', level=logging.INFO)

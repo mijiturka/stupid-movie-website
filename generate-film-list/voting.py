@@ -1,21 +1,27 @@
 import argparse
 import json
+import logging
 from pathlib import Path
 
 import generate
 
+logger = logging.getLogger(__name__)
+
 # A page to vote on
 
-def generate_voting_page():
-    all = json.loads(Path('./list.json').read_text())['films']
-    seen_in_2021 = Path('./seen-in-2021.md').read_text().splitlines()
+def generate_voting_page(movies_file, template_file):
+    movies = list(json.loads(Path(movies_file).read_text())['films'].keys())
 
-    positions = generate.random_order(seen_in_2021)
+    positions = generate.random_order(movies)
+
+    logger.debug(f'Movies are {movies}',
+                f'Positions are {positions}'
+    )
 
     generate.pages_of_lists(
-        seen_in_2021,
+        movies,
         positions,
-        template_file='template_vote.html',
+        template_file,
         films_per_page=100,
         generated_file_name_prefix='vote'
     )
@@ -43,16 +49,19 @@ def generate_results_page(result):
         positions,
         template_file='template_films_with_scores.html',
         films_per_page=100,
-        generated_file_name_prefix='voting-results'
+        generated_file_name_prefix='voting-results',
+        with_scores=True
     )
 
 # Combined charts generation
 
 if __name__ == '__main__':
+    logging.basicConfig(format='%(name)s.%(funcName)s: %(message)s', level=logging.INFO)
+
     parser = argparse.ArgumentParser(description='Generate pages for vote-sorted movies')
     parser.add_argument(
         '--vote',
-        help='Generate a page of the movies seen in 2021, with voting buttons',
+        help='Generate a page of movies with voting buttons',
         action='store_true',
         default=False
     )
@@ -66,6 +75,6 @@ if __name__ == '__main__':
     if not args.vote and not args.results:
         parser.error('No action to be taken')
     if args.vote:
-        generate_voting_page()
+        generate_voting_page('./list.json', 'template_vote_new_year.html')
     if args.results:
         generate_results_page(json.loads(args.results))
