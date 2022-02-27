@@ -1,1 +1,1 @@
-This is the source code for http://mayonesia.net.
+This is the source code for https://mayonesia.net.

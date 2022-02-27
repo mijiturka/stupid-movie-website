@@ -1,0 +1,33 @@
+a {
+  /* creates a margin otherwise */
+  display: inline-block;
+}
+
+.thumbnail {
+  float: left;
+  position: relative;
+  padding: 0px;
+  margin: 0px;
+}
+
+.duration {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+
+  padding-top: 0.1%;
+  padding-bottom: 0.1%;
+  padding-left: 0.5;
+  padding-right: 2%;
+
+  color: #AAA;
+  font-size: 125%;
+  font-family: 'XoloniumRegular';
+  background-color: rgba(0, 0, 0, 0.75);
+}
+
+.duration i {
+  /* play icon */
+  font-size: 125%;
+  vertical-align: text-bottom;
+}
