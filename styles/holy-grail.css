@@ -13,8 +13,8 @@
 }
 
 .container__left {
-    /* width: 25%; */
-    width: 435px;
+    /* width: 25%; */    
+    width: 475px;
 }
 
 .container__middle {
@@ -24,7 +24,7 @@
 
 .container__right {
     /* width: 20%; */
-    width: 692px;
+    width: 434px;
 }
 
 footer {
