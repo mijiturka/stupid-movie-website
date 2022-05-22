@@ -22,7 +22,3 @@ def movie_info(imdb_id):
     url = base_url() + endpoint(auth_key(), imdb_id)
 
     return requests.get(url)
-
-if __name__ == '__main__':
-    response = search('carnosaur')
-    print(response)
