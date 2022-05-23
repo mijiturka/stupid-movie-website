@@ -7,11 +7,8 @@ def database():
     client = pymongo.MongoClient(CONNECTION_STRING)
     return client['movies']
 
-def read_from_file():
-    return json.loads(Path('testdata/movies.json').read_text())
-
-def add(collection):
-    collection.insert_many(read_from_file())
+def add(collection, movie_info_json):
+    collection.insert_many(movie_info_json)
 
 def get_all(collection):
     for movie in collection.find():
@@ -20,12 +17,14 @@ def get_all(collection):
             {movie['imdbRating']}
         """)
 
+def read_from_file():
+    return json.loads(Path('testdata/movies.json').read_text())
 
 if __name__ == "__main__":
-    db = database()    
+    db = database()
 
     collection = db['info']
 
-    # add(collection)
+    add(collection, read_from_file())
 
     get_all(collection)
