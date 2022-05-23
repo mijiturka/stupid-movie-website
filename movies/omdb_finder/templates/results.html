@@ -1,0 +1,17 @@
+{% include "search.html" -%}
+
+<h1>Results</h1>
+
+{% for movie in movies -%}
+
+  <div>
+    <h2>{{movie['Title']}} ({{movie['Year']}})</h2>
+
+    {% if movie['Poster'] != 'N/A' -%}
+      <img src="{{movie['Poster']}}" />
+    {% endif -%}
+
+
+  </div>
+
+{% endfor -%}
