@@ -86,7 +86,7 @@ def all_film_pages():
 
 def single_film_page(film):
     film_title = json.loads(Path('./list.json').read_text())['films'][film]
-    review = json.loads(Path(f'../reviews-json/{film}.json').read_text())
+    review = json.loads(Path(f'../../reviews-json/{film}.json').read_text())
     html = template('templates/template_single_film.html').render(
         film = film,
         film_title = film_title,
