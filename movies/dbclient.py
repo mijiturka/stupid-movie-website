@@ -10,6 +10,12 @@ def database():
 def add(collection, movie_info_json):
     collection.insert_many(movie_info_json)
 
+def read_from_file():
+    return json.loads(Path('testdata/movies.json').read_text())
+
+def bulk_add(collection):
+    add(collection, read_from_file())
+
 def get_by_title(collection, title):
     return collection.find(
         {'Title': title}
@@ -22,8 +28,6 @@ def get_by_title_and_year(collection, title, year):
         'Year': year
         }
     )
-    # if cursor.count() == 0:
-    #     return None
 
 def get_by_imdb_id(collection, id):
     return collection.find_one(
@@ -37,14 +41,8 @@ def print_all(collection):
     for movie in collection.find():
         print(f"{movie['Title']} - {movie['imdbRating']}")
 
-def read_from_file():
-    return json.loads(Path('testdata/movies.json').read_text())
-
 if __name__ == "__main__":
     db = database()
-
     collection = db['info']
-
-    add(collection, read_from_file())
 
     get_all(collection)

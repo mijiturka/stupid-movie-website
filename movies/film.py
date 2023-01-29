@@ -65,6 +65,15 @@ class Film:
         else:
             raise PickyUserException("Couldn't find movie after user interrogation")
 
+    def _assign_attributes(self, c):
+        self.title = c['Title']
+        self.year = c['Year']
+        self.director = c['Director']
+        self.writer = c['Writer']
+        self.actors = c['Actors']
+        self.plot = c['Plot']
+        self.imdb_rating = c['imdbRating']
+
     def __init__(self, title, year):
         # Search our collection first
         cursor = our_collection.get(title=title, year=year)
@@ -79,14 +88,11 @@ class Film:
         try:
             next_film = cursor[1]
             logger.info("Found multiple movies. Which one?")
-            # TODO iterate and let user choose
             chosen = Film._iterate(cursor)
-            self.title = chosen['Title']
-            self.year = chosen['Year']
+            self._assign_attributes(chosen)
         except IndexError as e:
             logger.debug("We only found 1 movie. Everything is fine")
-            self.title = cursor[0]['Title']
-            self.year = cursor[0]['Year']
+            self._assign_attributes(cursor[0])
         except PickyUserException as e:
             logger.error(f"Failed to initialise movie: {e}")
             raise e
