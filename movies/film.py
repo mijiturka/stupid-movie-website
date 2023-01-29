@@ -74,7 +74,7 @@ class Film:
         self.plot = c['Plot']
         self.imdb_rating = c['imdbRating']
 
-    def __init__(self, title, year):
+    def __init__(self, title, year=None):
         # Search our collection first
         cursor = our_collection.get(title=title, year=year)
 
