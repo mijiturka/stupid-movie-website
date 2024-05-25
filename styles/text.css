@@ -20,3 +20,17 @@ small, .small {
   font-family: 'XoloniumRegular';
   font-size: 200%;
 }
+
+@font-face {
+    font-family: 'XoloniumRegular';
+        src: url('/fonts/Xolonium-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+      }
+
+@font-face {
+    font-family: 'XoloniumBold';
+        src: url('/fonts/Xolonium-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+      }
